@@ -2,18 +2,30 @@
 
 body {
   font-family: 'Playfair Display', serif;
+  background-color: #76ACD4;
+  color: #fff;
+}
+
+.right {
+  background-color: #5AD07D;
+}
+
+.wrong {
+  background-color: #EF5956;
 }
 
 #quiz-box {
   position: absolute;
-  top: 20%;
+  top: 15%;
   left: 10%;
   right: 10%;
   width: 80%;
   line-height: .5;
 }
 
-.quiz {
+.quiz,
+.toast,
+.result {
   font-size: 4rem;
   font-weight: 400;
   line-height: 1.1;
@@ -21,30 +33,35 @@ body {
   margin: 0;
 }
 
-.source {
-  font-size: 1.25rem;;
-  letter-spacing: 0.05em;
-  line-height: 1.1;
-  text-align: right;
-  margin-right: 4em;
+.quiz-end {
+  display: block;
+  width: 60%;
+  margin: 3rem auto;
+  padding: 0.5rem;
+  border-radius: 8px;
+  background-color: #ecc863;
+  font-size: 2rem;
+  text-align: center;
+  line-height: 1.5;
 }
 
-.source:before {
-  content: "—";
+.final-score {
+  display: block;
+  background-color: #6aa7d6;
+  border-radius: 16px;
+  width: 100%;
+  font-size: 2rem;
+  text-align: center;
+  line-height: 1.5;
 }
 
-.citation {
-  font-style: italic;
+table {
+  width: 100%;
+  margin-bottom: 4rem;
 }
 
-.citation:before {
-  content: ", ";
-  font-style: normal;
-}
-
-.year:before {
-  content: ", ";
-  font-style: normal;
+table td {
+  font-size: 4rem;
 }
 
 .btn {
@@ -52,9 +69,9 @@ body {
   display: inline-block;
   bottom: 150px;
   border-radius: 4px;
-  border: 2px solid #000;
+  border: 2px solid #104A75;
   color: #fff;
-  background-color: #000;
+  background-color: #104A75;
   padding: 15px;
   margin: 10px;
   transition: .5s ;
@@ -63,6 +80,25 @@ body {
 .btn:hover {
   background-color: #FFF;
   color: #000;
+}
+
+.btn-right {
+  background-color: #057025;
+  border-color:  #057025;
+  float: right;
+}
+
+.btn-wrong {
+  background-color: #AA0704;
+  border-color: #AA0704;
+  float: right;
+}
+
+.btn-result {
+  background-color: #fd9800;
+  border-color:#fd9800;
+  display: block;
+  margin: 2rem auto;
 }
 
 .btn:focus {

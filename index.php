@@ -34,9 +34,11 @@
         //Set toast
         if ($answer == $_SESSION['questions'][$_SESSION['index']]['correctAnswer']) {
             $toast = "Great, your answer is right!";
+            $bg_answer = "right";
             $_SESSION['result']['right']++;
         } else {
             $toast = "Oh no, you are wrong!";
+            $bg_answer = "wrong";
             $_SESSION['result']['wrong']++;
         }
     }
@@ -58,7 +60,7 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
+<body class="<?php if(isset($bg_answer)) {echo $bg_answer;} ?>">
     <div class="container">
 
         <?php if (!isset($_POST["answer"]) && ($_SESSION["index"] < $total)) { ?>
@@ -77,23 +79,52 @@
 
         <?php } elseif (isset($_POST["answer"]) && ($_SESSION["index"] < $total)) { ?>
 
-            <!-- Display if the use get the right answer -->
+            <!-- Display answer evaluation -->
             <div id="quiz-box">
+                <p class="breadcrumbs">Question <?php echo $_SESSION["index"] + 1; ?> of <?php echo $total; ?></p>
                 <p class="toast"><?php echo $toast; ?></p>
-                <form action="index.php"  method="post">
-                    <input type="hidden" name="id" value="<?php echo $_SESSION["index"] + 1; ?>" />
-                    <input type="submit" class="btn" value="Next Question" />
-                </form>
+
+                <?php if (($_SESSION["index"] + 1) == $total) { ?>
+
+                    <!-- Display button for the final score -->
+                    <div class="quiz-end">
+                        <p>The quiz is over!</p>
+                        <form action="index.php"  method="post">
+                            <input type="hidden" name="id" value="<?php echo $_SESSION["index"] + 1; ?>" />
+                            <input type="submit" class="btn btn-result" value="Final Score"/>
+                        </form>
+                    </div>
+
+                <?php } else { ?>
+
+                    <!-- Display button for the next answer -->
+                    <form action="index.php"  method="post">
+                        <input type="hidden" name="id" value="<?php echo $_SESSION["index"] + 1; ?>" />
+                        <input type="submit" class="btn <?php echo $bg_answer == "right" ? "btn-right" : "btn-wrong" ?>" value="Next Question" />
+                    </form>
+                <?php } ?>
             </div>
 
         <?php } else { ?>
-        
+
             <!-- Display the final score -->
             <div id="quiz-box">
-                <p class="result">You gave <?php echo $right_answers; ?> right answers and <?php echo $wrong_answers; ?> wrong answers</p>
-                <form action="index.php"  method="post">
-                    <input type="submit" class="btn" value="New Quiz" />
-                </form>
+                <div class="final-score">
+                    <h2>FINAL SCORE</h2>
+                    <table>
+                        <tr>
+                            <th>RIGHT ANSWERS</th>
+                            <th>WRONG ANSWERS</th>
+                        </tr>
+                        <tr>
+                            <td><?php echo $right_answers; ?></td>
+                            <td><?php echo $wrong_answers; ?></td>
+                        </tr>
+                    </table>
+                    <form action="index.php"  method="post">
+                        <input type="submit" class="btn" value="Play Again" />
+                    </form>
+                </div>
             </div>
 
         <?php } ?>

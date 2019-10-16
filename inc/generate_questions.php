@@ -1,13 +1,47 @@
 <?php
-// Generate random questions
 
-// Loop for required number of questions
+//Generate the single question starting from the correct answer
+function generate_question($value) {
+    $leftAdder = rand(1, $value - 1);
+    $rightAdder = $value - $leftAdder;
+    $max_value = max([$leftAdder, $rightAdder]);
 
-// Get random numbers to add
+    //$firstIncorrectAnswer must be greater than zero, greater than the highest adder and not equal to $value;
+    do {
+        $firstIncorrectAnswer = rand($value - 10, $value + 10);
+    } while ($firstIncorrectAnswer < 0 || ($firstIncorrectAnswer == $value) || ($firstIncorrectAnswer < $max_value));
 
-// Calculate correct answer
+    //$secondIncorrectAnswer must be greater than zero, greater than the highest adder, not equal to $value and not equal to $firstIncorrectAnswer;
+    do {
+        $secondIncorrectAnswer = rand($value - 10, $value + 10);
+    } while ($secondIncorrectAnswer < 0 || ($secondIncorrectAnswer == $firstIncorrectAnswer) || ($secondIncorrectAnswer == $value) || ($secondIncorrectAnswer < $max_value));
 
-// Get incorrect answers within 10 numbers either way of correct answer
-// Make sure it is a unique answer
+    $question = [
+        "leftAdder" => $leftAdder,
+        "rightAdder" => $rightAdder,
+        "results" => [
+            "correctAnswer" => $value,
+            "firstIncorrectAnswer" => $firstIncorrectAnswer,
+            "secondIncorrectAnswer" => $secondIncorrectAnswer
+        ]
+    ];
 
-// Add question and answer to questions array
+    return $question;
+}
+
+//Generate an array of 10 questions
+function generate_questions() {
+    $results = [];
+
+    //Generate an array of 10 correct answers
+    while (count($results) < 10) {
+        $value = rand(5, 99);
+        if (!array_search($value, $results)) {
+            $results[] = $value;
+        }
+    }
+
+    $questions = array_map('generate_question', $results);
+
+    return $questions;
+}

@@ -1,13 +1,13 @@
 <?php 
     session_start();
-    include('inc/questions.php');
+    include('inc/generate_questions.php');
 
-    //Collect and shuffle the questions
-    $total = count($questions);
+    //Generate questions
     if (empty($_SESSION['questions'])) {
-        shuffle($questions);
+        $questions = generate_questions();
         $_SESSION['questions'] = $questions;
     }
+    $total = count($_SESSION['questions']);
 
     //Keep track of the current question
     if (empty($_SESSION['index']) && empty($_POST["id"])) {
@@ -17,12 +17,10 @@
     }
 
     //Random answer option
-    $answers_array = [
-        $_SESSION['questions'][$_SESSION['index']]['correctAnswer'],
-        $_SESSION['questions'][$_SESSION['index']]['firstIncorrectAnswer'],
-        $_SESSION['questions'][$_SESSION['index']]['secondIncorrectAnswer']
-    ];
-    shuffle($answers_array);
+    if ($_SESSION["index"] < $total) {
+        $answers_array = $_SESSION['questions'][$_SESSION['index']]['results'];
+        shuffle($answers_array);
+    }
 
     //Keep track of the user's answers
     if (isset($_POST['answer'])) {
@@ -32,7 +30,7 @@
         $answer = filter_input(INPUT_POST, 'answer', FILTER_SANITIZE_STRING);
 
         //Set toast
-        if ($answer == $_SESSION['questions'][$_SESSION['index']]['correctAnswer']) {
+        if ($answer == $_SESSION['questions'][$_SESSION['index']]['results']['correctAnswer']) {
             $toast = "Great, your answer is right!";
             $bg_answer = "correct";
             $_SESSION['result']["correct"]++;

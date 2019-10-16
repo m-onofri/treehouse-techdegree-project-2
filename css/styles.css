@@ -6,7 +6,7 @@ body {
   color: #fff;
 }
 
-.right {
+.correct {
   background-color: #5AD07D;
 }
 
@@ -47,7 +47,8 @@ body {
 
 .final-score {
   display: block;
-  background-color: #6aa7d6;
+  padding: 0.5rem;
+  background-color: #ecc863;
   border-radius: 16px;
   width: 100%;
   font-size: 2rem;
@@ -82,7 +83,7 @@ table td {
   color: #000;
 }
 
-.btn-right {
+.btn-correct {
   background-color: #057025;
   border-color:  #057025;
   float: right;

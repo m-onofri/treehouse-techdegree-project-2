@@ -27,15 +27,15 @@
     //Keep track of the user's answers
     if (isset($_POST['answer'])) {
         if (!isset($_SESSION['result'])) {
-            $_SESSION['result'] = ['right' => 0, 'wrong' => 0];
+            $_SESSION['result'] = ['correct' => 0, 'wrong' => 0];
         }
         $answer = filter_input(INPUT_POST, 'answer', FILTER_SANITIZE_STRING);
 
         //Set toast
         if ($answer == $_SESSION['questions'][$_SESSION['index']]['correctAnswer']) {
             $toast = "Great, your answer is right!";
-            $bg_answer = "right";
-            $_SESSION['result']['right']++;
+            $bg_answer = "correct";
+            $_SESSION['result']["correct"]++;
         } else {
             $toast = "Oh no, you are wrong!";
             $bg_answer = "wrong";
@@ -45,8 +45,8 @@
 
     //Manage quiz result
     if ($_SESSION["index"] == $total) {
-        $right_answers = $_SESSION['result']['right'];
-        $wrong_answers = $_SESSION['result']['wrong'];
+        $right_answers = $_SESSION['result']['correct'];
+        $correct_answers = $_SESSION['result']['wrong'];
         session_destroy();
     }   
 ?>
@@ -100,7 +100,7 @@
                     <!-- Display button for the next answer -->
                     <form action="index.php"  method="post">
                         <input type="hidden" name="id" value="<?php echo $_SESSION["index"] + 1; ?>" />
-                        <input type="submit" class="btn <?php echo $bg_answer == "right" ? "btn-right" : "btn-wrong" ?>" value="Next Question" />
+                        <input type="submit" class="btn <?php echo $bg_answer == "correct" ? "btn-correct" : "btn-wrong" ?>" value="Next Question" />
                     </form>
                 <?php } ?>
             </div>
@@ -113,16 +113,16 @@
                     <h2>FINAL SCORE</h2>
                     <table>
                         <tr>
-                            <th>RIGHT ANSWERS</th>
+                            <th>CORRECT ANSWERS</th>
                             <th>WRONG ANSWERS</th>
                         </tr>
                         <tr>
                             <td><?php echo $right_answers; ?></td>
-                            <td><?php echo $wrong_answers; ?></td>
+                            <td><?php echo $correct_answers; ?></td>
                         </tr>
                     </table>
                     <form action="index.php"  method="post">
-                        <input type="submit" class="btn" value="Play Again" />
+                        <input type="submit" class="btn btn-result" value="Play Again" />
                     </form>
                 </div>
             </div>

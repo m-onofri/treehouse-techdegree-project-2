@@ -6,15 +6,22 @@ function generate_question($value) {
     $rightAdder = $value - $leftAdder;
     $max_value = max([$leftAdder, $rightAdder]);
 
-    //$firstIncorrectAnswer must be greater than zero, greater than the highest adder and not equal to $value;
+    /*$firstIncorrectAnswer must be 
+    ** - greater than the highest adder;
+    ** - not equal to $value;
+    */
     do {
         $firstIncorrectAnswer = rand($value - 10, $value + 10);
-    } while ($firstIncorrectAnswer < 0 || ($firstIncorrectAnswer == $value) || ($firstIncorrectAnswer < $max_value));
+    } while (($firstIncorrectAnswer == $value) || ($firstIncorrectAnswer <= $max_value));
 
-    //$secondIncorrectAnswer must be greater than zero, greater than the highest adder, not equal to $value and not equal to $firstIncorrectAnswer;
+    /*$secondIncorrectAnswer must be:
+    ** - greater than the highest adder;
+    ** - not equal to $value;
+    ** - not equal to $firstIncorrectAnswer;
+    */
     do {
         $secondIncorrectAnswer = rand($value - 10, $value + 10);
-    } while ($secondIncorrectAnswer < 0 || ($secondIncorrectAnswer == $firstIncorrectAnswer) || ($secondIncorrectAnswer == $value) || ($secondIncorrectAnswer < $max_value));
+    } while (($secondIncorrectAnswer == $firstIncorrectAnswer) || ($secondIncorrectAnswer == $value) || ($secondIncorrectAnswer <= $max_value));
 
     $question = [
         "leftAdder" => $leftAdder,

@@ -35,12 +35,13 @@ function generate_questions() {
 
     //Generate an array of 10 correct answers
     while (count($results) < 10) {
-        $value = rand(5, 99);
+        $value = rand(5, 100);
         if (!array_search($value, $results)) {
             $results[] = $value;
         }
     }
 
+    //Generate an array of 10 questions with relative answers
     $questions = array_map('generate_question', $results);
 
     return $questions;

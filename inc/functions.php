@@ -53,3 +53,14 @@ function generate_questions() {
 
     return $questions;
 }
+
+//Check if the user choice is correct or incorrect
+function check_selected_btn($correct_answer, $user_choice, $answer_option) {
+    if ($user_choice == $answer_option) {
+        if ($correct_answer == $answer_option) {
+            return "btn-correct";
+        } else {
+            return "btn-wrong";
+        }
+    }
+}

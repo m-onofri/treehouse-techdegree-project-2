@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    include('inc/generate_questions.php');
+    include('inc/functions.php');
 
     //Generate questions
     if (empty($_SESSION['questions'])) {
@@ -32,7 +32,8 @@
         $answer = filter_input(INPUT_POST, 'answer', FILTER_SANITIZE_STRING);
 
         //Set toast and keep track of the user's answers
-        if ($answer == $_SESSION['questions'][$_SESSION['index']]['results']['correctAnswer']) {
+        $correct_answer = $_SESSION['questions'][$_SESSION['index']]['results']['correctAnswer'];
+        if ($answer == $correct_answer) {
             $toast = "Great, your answer is correct!";
             $bg_answer = "correct";
             $_SESSION['result']["correct"]++;
@@ -56,7 +57,7 @@
 <?php if (!isset($_POST["answer"]) && ($_SESSION["index"] < $total)) { ?>
 
     <!-- Display the question and the answer options -->
-    <?php include('inc/questions.php'); ?>
+    <?php include('inc/question.php'); ?>
     
 <?php } elseif (isset($_POST["answer"]) && ($_SESSION["index"] < $total)) { ?>
 
@@ -83,7 +84,7 @@
         <?php } ?>
 
     </div>
-    <?php include('inc/questions.php'); ?>
+    <?php include('inc/question.php'); ?>
 
 <?php } else { ?>
 

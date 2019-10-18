@@ -51,18 +51,6 @@ body {
   margin: 0;
 }
 
-.quiz-end {
-  display: block;
-  width: 60%;
-  margin: 3rem auto;
-  padding: 0.5rem;
-  border-radius: 8px;
-  background-color: #ecc863;
-  font-size: 2rem;
-  text-align: center;
-  line-height: 1.5;
-}
-
 .final-score {
   display: block;
   padding: 0.5rem;
@@ -98,7 +86,6 @@ button.btn {
   background-color: #104A75;
   padding: 15px;
   margin: 10px;
-  /* transition: .5s ; */
   text-decoration: none;
 }
 .btn:hover {
@@ -109,13 +96,11 @@ button.btn {
 .btn-correct {
   background-color: #057025;
   border-color:  #057025;
-  float: right;
 }
 
 .btn-wrong {
   background-color: #AA0704;
   border-color: #AA0704;
-  float: right;
 }
 
 .btn-result {

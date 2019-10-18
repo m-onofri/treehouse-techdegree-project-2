@@ -1,20 +1,22 @@
-<p class="breadcrumbs">
-    Question <?php echo $_SESSION["index"] + 1; ?> of <?php echo $total; ?>
-</p>
-<p class="quiz">What is <?php echo $leftAdder; ?> + <?php echo $rightAdder; ?>?</p>
+<div id="quiz-box">
+    <p class="breadcrumbs">
+        Question <?php echo $_SESSION["index"] + 1; ?> of <?php echo $total; ?>
+    </p>
+    <p class="quiz">What is <?php echo $leftAdder; ?> + <?php echo $rightAdder; ?>?</p>
 
-<?php if (!isset($_POST["answer"])) { ?>
+    <?php if (!isset($_POST["answer"])) { ?>
 
-    <form action="index.php"  method="post">
+        <form action="index.php"  method="post">
+            <?php foreach ($_SESSION['answers'] as $item_answers) { ?>
+                <input type="submit" class="btn" name="answer" value="<?php echo $item_answers; ?>" />
+            <?php } ?>
+        </form>
+
+    <?php } else { ?>
+
         <?php foreach ($_SESSION['answers'] as $item_answers) { ?>
-            <input type="submit" class="btn" name="answer" value="<?php echo $item_answers; ?>" />
+            <button class="btn"><?php echo $item_answers; ?></button>
         <?php } ?>
-    </form>
 
-<?php } else { ?>
-
-    <?php foreach ($_SESSION['answers'] as $item_answers) { ?>
-        <button class="btn"><?php echo $item_answers; ?></button>
     <?php } ?>
-
-<?php } ?>
+</div>

@@ -7,6 +7,7 @@
 
     <?php if (!isset($_POST["answer"])) { ?>
 
+        <!-- Display active buttons before user choice -->
         <form action="index.php"  method="post">
             <?php foreach ($_SESSION['answers'] as $item_answers) { ?>
                 <input type="submit" class="btn" name="answer" value="<?php echo $item_answers; ?>" />
@@ -15,6 +16,7 @@
 
     <?php } else { ?>
 
+        <!-- Display inactive buttons and user choice -->
         <?php foreach ($_SESSION['answers'] as $item_answers) { ?>
             <button class="btn <?php echo check_selected_btn($correct_answer, $_POST["answer"], $item_answers); ?>">
                 <?php echo $item_answers; ?>
